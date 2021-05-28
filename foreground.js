@@ -43,7 +43,7 @@ http.onreadystatechange = (e) => {
 localStorage.clear();
 
 async function first_call() {
-    const rawResponse = await fetch('https://safebrowsing.googleapis.com/v4/threatMatches:find?key=API_KEY', {
+    const rawResponse = await fetch('https://safebrowsing.googleapis.com/v4/threatMatches:find?key=AIzaSyBv0_jYJzbsDBiAbnGUe9gE7zcV-VqLbgY', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -52,7 +52,6 @@ async function first_call() {
         body: JSON.stringify(params)
     });
     const content = await rawResponse.json();
-    console.log(content);
     localStorage.setItem('response', JSON.stringify(content));
 };
 
@@ -60,12 +59,14 @@ async function first_call() {
 async function second_call() {
     await first_call();
 
-    var contentResponse = JSON.parse(localStorage.getItem('response'));
-    var problemURLS = {};
-    for (var i = 0; i < contentResponse.length; i++) {
-        problemURLS.push({ "url": contentResponse[i].threat.url.toString(), "threatType": contentResponse[i].threat.threatType.toString() });
+    var contentResponse = [];
+    contentResponse = JSON.parse(localStorage.getItem('response'));
+
+    var problemURLS = [];
+    for (var i = 0; i < contentResponse.matches.length; i++) {
+        problemURLS.push({ "url": contentResponse.matches[i].threat.url.toString(), "threatType": contentResponse.matches[i].threatType.toString() });
     }
-    console.log(problemURLS);
+    console.log(problemURLS[0]);
 }
 
 second_call();
