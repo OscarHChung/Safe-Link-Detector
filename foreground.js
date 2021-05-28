@@ -29,7 +29,7 @@ for (i = 0; i < linkArr.length; i++) {
 }
 var params = linkValuesArr;
 /* const http = new XMLHttpRequest();
-const url = 'https://safebrowsing.googleapis.com/v4/threatMatches:find?key=AIzaSyBv0_jYJzbsDBiAbnGUe9gE7zcV-VqLbgY';
+const url = 'https://safebrowsing.googleapis.com/v4/threatMatches:find?key=API_KEY';
 const params = linkValuesArr;
 http.open('POST', url);
 http.setRequestHeader('Content-type', 'application/json');
