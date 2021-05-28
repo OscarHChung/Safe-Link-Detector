@@ -43,7 +43,7 @@ http.onreadystatechange = (e) => {
 localStorage.clear();
 
 async function first_call() {
-    const rawResponse = await fetch('https://safebrowsing.googleapis.com/v4/threatMatches:find?key=AIzaSyBv0_jYJzbsDBiAbnGUe9gE7zcV-VqLbgY', {
+    const rawResponse = await fetch('https://safebrowsing.googleapis.com/v4/threatMatches:find?key=API_KEY', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
