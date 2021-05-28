@@ -1,0 +1,25 @@
+{
+  "name": "Safe Link Detector",
+  "description": "This extension verifies the links of the websites you visit.",
+  "version": "0.1.0",
+  "manifest_version": 2,
+  "icons": {
+    "16": "./safe-link-logo.png",
+    "32": "./safe-link-logo.png",
+    "48": "./safe-link-logo.png",
+    "128": "./safe-link-logo.png"
+  },
+  "background": {
+    "scripts": [ "./background.js" ]
+  },
+  "options_page": "./options.html",
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "scripting",
+    "tabs",
+    "*://*/*",
+    "storage"
+  ]
+}

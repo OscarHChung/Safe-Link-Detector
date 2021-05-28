@@ -1,0 +1,19 @@
+﻿#clickme {
+    width: 200px;
+    height: 40px;
+    text-align: center;
+    color: white;
+    border-radius: 4px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    background: rgb(202, 60, 60);
+    font-weight: bold;
+    border: 1px;
+}
+
+#clickme:active {
+    background: rgb(171, 50, 50);
+}
+
+#clickme:hover {
+    cursor: pointer;
+}
