@@ -10,7 +10,6 @@ for (var i = 0; i < links.length; i++) {
 }
 
 
-
 //Post Request Body Setup
 var linkValuesArr = {
     "client": {
@@ -61,12 +60,85 @@ async function second_call() {
 
     var contentResponse = [];
     contentResponse = JSON.parse(localStorage.getItem('response'));
-
-    var problemURLS = [];
-    for (var i = 0; i < contentResponse.matches.length; i++) {
-        problemURLS.push({ "url": contentResponse.matches[i].threat.url.toString(), "threatType": contentResponse.matches[i].threatType.toString() });
+    if (contentResponse.matches == null) {
+        alert("This site is safe!");
     }
-    console.log(problemURLS[0]);
+    else {
+        var problemURLS = [];
+        for (var i = 0; i < contentResponse.matches.length; i++) {
+            problemURLS.push({ "url": contentResponse.matches[i].threat.url.toString(), "threatType": contentResponse.matches[i].threatType.toString() });
+        }
+        var warning = "WARNING! The following links are dangerous:\n";
+        for (var i = 0; i < problemURLS.length; i++) {
+            warning += "\n" + problemURLS[0].threatType.toString() + ": " + problemURLS[0].url.toString();
+        }
+
+
+        /*
+
+        var styles = `
+    .popup-background {
+    position: fixed; 
+    z-index: -1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4); 
+}
+
+.popup-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; 
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+`;
+        var styleSheet = document.createElement("style");
+        styleSheet.type = "text/css";
+        styleSheet.innerText = styles;
+        document.head.appendChild(styleSheet);
+
+
+        var popupBackground = document.createElement("div");
+        popupBackground.classList.add("popup-background");
+
+        var popupContent = document.createElement("div");
+        popupContent.classList.add("popup-content");
+
+        var popupClose = document.createElement("span");
+        popupClose.classList.add("close");
+        popupClose.innerHTML += "&times";
+        popupContent.appendChild(popupClose);
+
+        var popupPara = document.createElement("p");
+        popupPara.innerHTML += "TEST TEST";
+        popupContent.appendChild(popupPara);
+
+        popupBackground.appendChild(popupContent);
+
+        document.body.insertBefore(popupBackground, document.body.firstChild);
+        console.log(popupBackground); */
+
+        alert(warning);
+    }
 }
 
 second_call();
