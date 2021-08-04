@@ -61,21 +61,95 @@ async function second_call() {
     var contentResponse = [];
     contentResponse = JSON.parse(localStorage.getItem('response'));
     if (contentResponse.matches == null) {
-        alert("This site is safe!");
+        var styles = `
+            .visible {
+                opacity: 1
+            }
+            .popup-background {
+                position: fixed; 
+                z-index: 10;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%; 
+                overflow: auto; 
+                background-color: rgb(0,0,0); 
+                background-color: rgba(0,0,0,0.4); 
+            }
+
+            .popup-content {
+                background-color: #fefefe;
+                margin: 15% auto;
+                padding: 20px;
+                border: 1px solid #888;
+                width: 30%;
+            }
+
+            .popup-para {
+                font-size: 30px;
+                font-weight: bold;
+                font-family: Arial, Helvetica, sans-serif;
+                color: blue;
+            }
+
+            .close {
+                color: #aaa;
+                float: right;
+                font-size: 28px;
+                font-weight: bold;
+            }
+
+            .close:hover,
+            .close:focus {
+                color: black;
+                text-decoration: none;
+                cursor: pointer;
+            }
+        `;
+        var styleSheet = document.createElement("style");
+        styleSheet.type = "text/css";
+        styleSheet.innerText = styles;
+        document.head.appendChild(styleSheet);
+
+
+        var popupBackground = document.createElement("div");
+        popupBackground.classList.add("popup-background");
+        popupBackground.classList.add("visible");
+
+        var popupContent = document.createElement("div");
+        popupContent.classList.add("popup-content");
+        popupContent.classList.add("visible");
+
+        var popupClose = document.createElement("span");
+        popupClose.classList.add("close");
+        popupClose.classList.add("visible");
+        popupClose.innerHTML += "&times";
+        popupClose.onclick = function () { 
+            var elements = document.getElementsByClassName("visible");
+            while(elements.length > 0){
+                elements[0].parentNode.removeChild(elements[0]);
+            }
+        };
+        popupContent.appendChild(popupClose);
+
+        var popupPara = document.createElement("p");
+        popupPara.innerHTML += "This site is safe!";
+        popupPara.classList.add("popup-para");
+        popupContent.appendChild(popupPara);
+
+        popupBackground.appendChild(popupContent);
+
+        document.body.insertBefore(popupBackground, document.body.firstChild);
     }
     else {
         var problemURLS = [];
         for (var i = 0; i < contentResponse.matches.length; i++) {
             problemURLS.push({ "url": contentResponse.matches[i].threat.url.toString(), "threatType": contentResponse.matches[i].threatType.toString() });
         }
-        var warning = "WARNING! The following links are dangerous:<br>";
+        var warning = "WARNING! This site has dangerous links:<br>";
         for (var i = 0; i < problemURLS.length; i++) {
-            warning += "<br>" + "&emsp;" + problemURLS[0].threatType.toString() + ": " + problemURLS[0].url.toString();
+            warning += "<br>" + "&emsp; - " + problemURLS[0].threatType.toString() + ": " + problemURLS[0].url.toString();
         }
-
-
-    
-
         var styles = `
             .visible {
                 opacity: 1
@@ -102,13 +176,15 @@ async function second_call() {
 
             .popup-para {
                 font-size: 30px;
+                font-weight: bold;
+                font-family: Arial, Helvetica, sans-serif;
                 color: red;
             }
 
             .close {
                 color: #aaa;
                 float: right;
-                font-size: 28px;
+                font-size: 30px;
                 font-weight: bold;
             }
 
@@ -153,7 +229,6 @@ async function second_call() {
         popupBackground.appendChild(popupContent);
 
         document.body.insertBefore(popupBackground, document.body.firstChild);
-        console.log(popupBackground);
     }
 }
 
