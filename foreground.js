@@ -68,9 +68,9 @@ async function second_call() {
         for (var i = 0; i < contentResponse.matches.length; i++) {
             problemURLS.push({ "url": contentResponse.matches[i].threat.url.toString(), "threatType": contentResponse.matches[i].threatType.toString() });
         }
-        var warning = "WARNING! The following links are dangerous:\n";
+        var warning = "WARNING! The following links are dangerous:<br>";
         for (var i = 0; i < problemURLS.length; i++) {
-            warning += "\n" + problemURLS[0].threatType.toString() + ": " + problemURLS[0].url.toString();
+            warning += "<br>" + "&emsp;" + problemURLS[0].threatType.toString() + ": " + problemURLS[0].url.toString();
         }
 
 
@@ -97,7 +97,12 @@ async function second_call() {
                 margin: 15% auto;
                 padding: 20px;
                 border: 1px solid #888;
-                width: 80%;
+                width: 60%;
+            }
+
+            .popup-para {
+                font-size: 30px;
+                color: red;
             }
 
             .close {
@@ -142,6 +147,7 @@ async function second_call() {
 
         var popupPara = document.createElement("p");
         popupPara.innerHTML += warning;
+        popupPara.classList.add("popup-para");
         popupContent.appendChild(popupPara);
 
         popupBackground.appendChild(popupContent);
