@@ -74,43 +74,46 @@ async function second_call() {
         }
 
 
-        /*
+    
 
         var styles = `
-    .popup-background {
-    position: fixed; 
-    z-index: -1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%; 
-    overflow: auto; 
-    background-color: rgb(0,0,0); 
-    background-color: rgba(0,0,0,0.4); 
-}
+            .visible {
+                opacity: 1
+            }
+            .popup-background {
+                position: fixed; 
+                z-index: 10;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%; 
+                overflow: auto; 
+                background-color: rgb(0,0,0); 
+                background-color: rgba(0,0,0,0.4); 
+            }
 
-.popup-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%; 
-}
+            .popup-content {
+                background-color: #fefefe;
+                margin: 15% auto;
+                padding: 20px;
+                border: 1px solid #888;
+                width: 80%;
+            }
 
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
+            .close {
+                color: #aaa;
+                float: right;
+                font-size: 28px;
+                font-weight: bold;
+            }
 
-    .close:hover,
-    .close:focus {
-        color: black;
-        text-decoration: none;
-        cursor: pointer;
-    }
-`;
+            .close:hover,
+            .close:focus {
+                color: black;
+                text-decoration: none;
+                cursor: pointer;
+            }
+        `;
         var styleSheet = document.createElement("style");
         styleSheet.type = "text/css";
         styleSheet.innerText = styles;
@@ -119,25 +122,32 @@ async function second_call() {
 
         var popupBackground = document.createElement("div");
         popupBackground.classList.add("popup-background");
+        popupBackground.classList.add("visible");
 
         var popupContent = document.createElement("div");
         popupContent.classList.add("popup-content");
+        popupContent.classList.add("visible");
 
         var popupClose = document.createElement("span");
         popupClose.classList.add("close");
+        popupClose.classList.add("visible");
         popupClose.innerHTML += "&times";
+        popupClose.onclick = function () { 
+            var elements = document.getElementsByClassName("visible");
+            while(elements.length > 0){
+                elements[0].parentNode.removeChild(elements[0]);
+            }
+        };
         popupContent.appendChild(popupClose);
 
         var popupPara = document.createElement("p");
-        popupPara.innerHTML += "TEST TEST";
+        popupPara.innerHTML += warning;
         popupContent.appendChild(popupPara);
 
         popupBackground.appendChild(popupContent);
 
         document.body.insertBefore(popupBackground, document.body.firstChild);
-        console.log(popupBackground); */
-
-        alert(warning);
+        console.log(popupBackground);
     }
 }
 
