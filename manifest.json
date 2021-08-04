@@ -1,6 +1,6 @@
 {
-  "name": "Safe Link Detector",
-  "description": "This extension verifies the links of the websites you visit.",
+  "name": "Safe Links",
+  "description": "This extension verifies the links of the websites you visit, preventing your browsing from accidentally clicking on dangerous links.",
   "version": "0.1.0",
   "manifest_version": 2,
   "icons": {
