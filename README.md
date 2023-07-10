@@ -1,7 +1,7 @@
 # Safe-Link-Detector
 
 
-Chrome extension that detects safe links on a website.
+Chrome extension that detects and prevents malicious links on a website.
 
 
 ●	“Featured App” on Google Chrome Web Store
